@@ -269,12 +269,13 @@ function preventScrollMobileSafari() {
       'paddingRight',
       `${window.innerWidth - document.documentElement.clientWidth}px`
     ),
-    setStyle(document.documentElement, 'overflow', 'hidden'),
-    setStyle(document.body, 'marginTop', `-${scrollY}px`)
+    setStyle(document.documentElement, 'overflow', 'hidden')
+    // setStyle(document.body, 'marginTop', `-${scrollY}px`)
   );
 
   // Scroll to the top. The negative margin on the body will make this appear the same.
-  window.scrollTo(0, 0);
+  // This produces a flicker on Safari iOS, so we skip the `marginTop` and this altogether for now.
+  // window.scrollTo(0, 0);
 
   const removeEvents = chain(
     addEvent(document, 'touchstart', onTouchStart, {
